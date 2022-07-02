@@ -1,5 +1,8 @@
 package com.digiassist.ticket.domain;
 
+
+import java.util.Date;
+
 import org.springframework.cloud.gcp.data.firestore.Document;
 
 import com.google.cloud.firestore.annotation.DocumentId;
@@ -19,5 +22,13 @@ public class Ticket {
 	
 	private String response;
 	
-	private String status;
+	private TicketStatus status;
+	
+	private String assignee;
+	
+	private Date createdDtm;
+	
+	private Date updatedDtm;
+	
+	private Date resolvedDtm;
 }

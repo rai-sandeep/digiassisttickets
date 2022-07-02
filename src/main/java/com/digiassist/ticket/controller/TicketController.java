@@ -1,12 +1,15 @@
 package com.digiassist.ticket.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digiassist.ticket.domain.Ticket;
+import com.digiassist.ticket.domain.TicketDto;
 import com.digiassist.ticket.service.TicketService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +29,13 @@ public class TicketController {
 	}
 	
 	@PostMapping
-	public Mono<Ticket> addTicket(@RequestBody Ticket ticket){//TODO: validate request
+	public Mono<Ticket> addTicket(@RequestBody TicketDto ticket){//TODO: validate request
 		return service.addTicket(ticket);
+	}
+	
+
+	@PutMapping("/{ticketId}")
+	public Mono<Ticket> updateTicket(@PathVariable String ticketId, @RequestBody TicketDto ticket){
+		return service.updateTicket(ticketId, ticket);
 	}
 }
