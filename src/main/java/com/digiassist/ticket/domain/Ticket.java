@@ -26,6 +26,10 @@ public class Ticket {
 	
 	private String assignee;
 	
+	private String emailId;
+	
+	private String phoneNum;
+	
 	private Date createdDtm;
 	
 	private Date updatedDtm;

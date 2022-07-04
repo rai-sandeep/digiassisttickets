@@ -16,4 +16,8 @@ public class TicketDto {
 	
 	private String assignee;
 	
+	private String emailId;
+	
+	private String phoneNum;
+	
 }

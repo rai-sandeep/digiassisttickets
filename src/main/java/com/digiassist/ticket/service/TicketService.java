@@ -74,6 +74,12 @@ public class TicketService {
 		if (ticket.getStatus() != null) {
 			dbTicket.setStatus(ticket.getStatus());
 		}
+		if (ticket.getEmailId() != null) {
+			dbTicket.setEmailId(ticket.getEmailId());
+		}
+		if (ticket.getPhoneNum() != null) {
+			dbTicket.setPhoneNum(ticket.getPhoneNum());
+		}
 		
 		dbTicket.setUpdatedDtm(new Date());
 		return dbTicket;
@@ -96,6 +102,8 @@ public class TicketService {
 		dbTicket.setAssignee(ticket.getAssignee());
 		dbTicket.setCandidateId(ticket.getCandidateId());
 		dbTicket.setQuery(ticket.getQuery());
+		dbTicket.setEmailId(ticket.getEmailId());
+		dbTicket.setPhoneNum(ticket.getPhoneNum());
 		return dbTicket;
 	}
 
