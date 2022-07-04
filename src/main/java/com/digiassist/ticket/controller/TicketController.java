@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digiassist.ticket.domain.Ticket;
@@ -17,15 +16,29 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("tickets")
 @RequiredArgsConstructor
 public class TicketController {
 	
 	private final TicketService service;
 
 	@GetMapping
-	public Flux<Ticket> getTickets(){
-		return service.getTickets();
+	public Flux<Ticket> getOpenTickets(){
+		return service.getOpenTickets();
+	}
+
+	@GetMapping("/all")
+	public Flux<Ticket> getAllTickets(){
+		return service.getAllTickets();
+	}
+
+	@GetMapping("/assignee/{assignee}")
+	public Flux<Ticket> getOpenTicketsByAssignee(@PathVariable String assignee){
+		return service.getOpenTicketsByAssignee(assignee);
+	}
+
+	@GetMapping("/assignee/{assignee}/all")
+	public Flux<Ticket> getAllTicketsByAssignee(@PathVariable String assignee){
+		return service.getAllTicketsByAssignee(assignee);
 	}
 	
 	@PostMapping

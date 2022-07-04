@@ -25,8 +25,20 @@ public class TicketService {
 	
 	private final TicketRepository repo;
 
-	public Flux<Ticket> getTickets(){
+	public Flux<Ticket> getOpenTickets(){
+		return repo.findByStatusNot(TicketStatus.RESOLVED);
+	}
+
+	public Flux<Ticket> getAllTickets(){
 		return repo.findAll();
+	}
+
+	public Flux<Ticket> getOpenTicketsByAssignee(String assignee){
+		return repo.findByAssigneeAndStatusNot(assignee, TicketStatus.RESOLVED);
+	}
+
+	public Flux<Ticket> getAllTicketsByAssignee(String assignee){
+		return repo.findByAssignee(assignee);
 	}
 	
 	public Mono<Ticket> addTicket(TicketDto ticket){
