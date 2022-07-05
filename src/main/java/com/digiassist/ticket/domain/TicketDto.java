@@ -8,6 +8,8 @@ public class TicketDto {
 
 	private String candidateId;
 	
+	private String candidateName;
+	
 	private String query;
 	
 	private String response;

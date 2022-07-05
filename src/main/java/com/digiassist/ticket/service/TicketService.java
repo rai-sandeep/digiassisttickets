@@ -82,6 +82,9 @@ public class TicketService {
 		if (StringUtils.isNotBlank(ticket.getPhoneNum())) {
 			dbTicket.setPhoneNum(ticket.getPhoneNum());
 		}
+		if (StringUtils.isNotBlank(ticket.getCandidateName())) {
+			dbTicket.setCandidateName(ticket.getCandidateName());
+		}
 		
 		dbTicket.setUpdatedDtm(new Date());
 		return dbTicket;
@@ -90,6 +93,9 @@ public class TicketService {
 	private Ticket prepareForInsert(TicketDto ticket) {	
 		if (StringUtils.isBlank(ticket.getEmailId())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Id is needed to create ticket");
+		}
+		if (StringUtils.isBlank(ticket.getCandidateName())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Candidate name is needed to create ticket");
 		}
 		if (StringUtils.isBlank(ticket.getQuery())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Query is needed to create ticket");
@@ -106,6 +112,7 @@ public class TicketService {
 		dbTicket.setQuery(ticket.getQuery());
 		dbTicket.setEmailId(ticket.getEmailId());
 		dbTicket.setPhoneNum(ticket.getPhoneNum());
+		dbTicket.setCandidateName(ticket.getCandidateName());
 		return dbTicket;
 	}
 

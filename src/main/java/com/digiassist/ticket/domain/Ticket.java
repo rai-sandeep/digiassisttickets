@@ -18,6 +18,8 @@ public class Ticket {
 	
 	private String candidateId;
 	
+	private String candidateName;
+	
 	private String query;
 	
 	private String response;
