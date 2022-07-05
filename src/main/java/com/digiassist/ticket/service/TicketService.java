@@ -56,28 +56,30 @@ public class TicketService {
 		if (TicketStatus.RESOLVED == dbTicket.getStatus()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Resolved ticket cannot be updated");
 		}	
-		if (StringUtils.isNotBlank(ticket.getCandidateId())) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Candidate Id cannot be updated");
-		}
 		
 		if (TicketStatus.RESOLVED == ticket.getStatus()) {
 			if (StringUtils.isBlank(ticket.getResponse())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot resolve ticket without query response");
 			}
-			dbTicket.setResponse(ticket.getResponse());
 			dbTicket.setResolvedDtm(new Date());
 		}
-		
-		if (StringUtils.isNotBlank(ticket.getAssignee())) {
-			dbTicket.setAssignee(ticket.getAssignee());
-		}
+
 		if (ticket.getStatus() != null) {
 			dbTicket.setStatus(ticket.getStatus());
 		}
-		if (ticket.getEmailId() != null) {
+		if (StringUtils.isNotBlank(ticket.getAssignee())) {
+			dbTicket.setAssignee(ticket.getAssignee());
+		}
+		if (StringUtils.isNotBlank(ticket.getCandidateId())) {
+			dbTicket.setCandidateId(ticket.getCandidateId());
+		}
+		if (StringUtils.isNotBlank(ticket.getResponse())) {
+			dbTicket.setResponse(ticket.getResponse());
+		}
+		if (StringUtils.isNotBlank(ticket.getEmailId())) {
 			dbTicket.setEmailId(ticket.getEmailId());
 		}
-		if (ticket.getPhoneNum() != null) {
+		if (StringUtils.isNotBlank(ticket.getPhoneNum())) {
 			dbTicket.setPhoneNum(ticket.getPhoneNum());
 		}
 		
@@ -86,8 +88,8 @@ public class TicketService {
 	}
 
 	private Ticket prepareForInsert(TicketDto ticket) {	
-		if (StringUtils.isBlank(ticket.getCandidateId())) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Candidate Id is needed to create ticket");
+		if (StringUtils.isBlank(ticket.getEmailId())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email Id is needed to create ticket");
 		}
 		if (StringUtils.isBlank(ticket.getQuery())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Query is needed to create ticket");
