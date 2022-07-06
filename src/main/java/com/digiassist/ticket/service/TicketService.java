@@ -106,7 +106,7 @@ public class TicketService {
 				.append(UUID.randomUUID().toString().substring(0, 7).toUpperCase()).toString();
 		dbTicket.setTicketId(ticketId);
 		dbTicket.setCreatedDtm(new Date());
-		dbTicket.setStatus(TicketStatus.NEW);
+		dbTicket.setStatus(TicketStatus.UNRESOLVED);
 		dbTicket.setAssignee(ticket.getAssignee());
 		dbTicket.setCandidateId(ticket.getCandidateId());
 		dbTicket.setQuery(ticket.getQuery());
